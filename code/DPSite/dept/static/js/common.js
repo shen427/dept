@@ -1,0 +1,5 @@
+$(function() {
+    $.dept = {
+        BASE: '/dept'
+    };
+});

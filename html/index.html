@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap Admin</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
+    <link class="include" rel="stylesheet" type="text/css" href="lib/jqplot/jquery.jqplot.css" />
+
+    <script src="lib/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="lib/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
+    <script type="text/javascript" src="lib/jqplot/jquery.jqplot.js"></script>
+    <script type="text/javascript" src="lib/jqplot/plugins/jqplot.pieRenderer.js"></script>
+    <script type="text/javascript" src="lib/jqplot/plugins/jqplot.donutRenderer.js"></script>
+    <script type="text/javascript" src="lib/jqplot/plugins/jqplot.barRenderer.js"></script>
+    <script type="text/javascript" src="lib/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+    <script type="text/javascript" src="lib/jqplot/plugins/jqplot.pointLabels.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $(".knob").knob();
+
+        var uls = $('.sidebar-nav > ul > *').clone();
+        uls.addClass('visible-xs');
+        $('#main-menu').append(uls.clone());
+        
+        $.jqplot.config.enablePlugins = true;
+        var dataPie = [[
+                '新员工', 25
+            ], [
+                '三年以下经验', 15
+            ], [
+                '五年以下经验', 4
+            ], [
+                '五年以上经验', 8
+            ]];
+        var plotPie = $.jqplot('userStatistics', [dataPie], {
+            seriesDefaults: {
+                // make this a donut chart.
+                renderer:$.jqplot.DonutRenderer,
+                rendererOptions:{
+                    // Donut's can be cut into slices like pies.
+                    sliceMargin: 3,
+                    // Pies and donuts can start at any arbitrary angle.
+                    startAngle: -90,
+                    showDataLabels: true,
+                    // By default, data labels show the percentage of the donut/pie.
+                    // You can show the data 'value' or data 'label' instead.
+                    dataLabels: 'value',
+                    // "totalLabel=true" uses the centre of the donut for the total amount
+                    totalLabel: true
+                }
+            },
+            legend: {
+                show:true,
+                location: 'nw',  
+                //placement: "outside"
+            }
+        });
+ 
+        var dataBar = [87, 92, 90, 89, 70, 80, 89, 95, 99, 100, 87, 76, 50];
+        var ticks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+        var plotBar = $.jqplot('occupy', [dataBar], {
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer: $.jqplot.BarRenderer,
+                pointLabels: { show: true }
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                }
+            },
+            highlighter: { show: false }
+        });
+    });
+    </script>
+    <style type="text/css">
+        .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover { 
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="theme-blue">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="" href="index.html"><span class="navbar-brand"><span class="fa fa-paper-plane"></span> 国际事业-第二事业部</span></a>
+        </div>
+
+        <div class="navbar-collapse collapse" style="height: 1px;">
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+                <li class="dropdown hidden-xs">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user padding-right-small" style="position:relative;top: 3px;"></span> 张三
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">我的账号</a></li>
+                        <li><a href="#">密码修改</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="#">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar-nav">
+        <ul>
+            <li><a href="#" class="nav-header"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+            <li>
+                <a href="#" data-target=".user-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-user"></i> 人员管理<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="user-menu nav nav-list collapse">
+                    <li><a href="users.html"><span class="fa fa-child"></span> 人员</a></li>
+                    <li><a href="depts.html"><span class="fa fa-users"></span> 部门</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-target=".prj-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-code-fork"></i> 项目管理<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="prj-menu nav nav-list collapse">
+                    <li><a href="projects.html"><span class="fa fa-code"></span> 项目</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-target=".score-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-file-powerpoint-o"></i> 实绩管理<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="score-menu nav nav-list collapse">
+                    <li><a href="plan.html"><span class="fa fa-file-excel-o"></span> 产值计划</a></li>
+                    <li><a href="planHistory.html"><span class="fa fa-history"></span> 计划历史</a></li>
+                    <li><a href="score.html"><span class="fa fa-file-image-o"></span> 实绩统计</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-target=".chart-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-bar-chart-o"></i> 统计分析<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="chart-menu nav nav-list collapse">
+                    <li><a href="#"><span class="fa fa-male"></span> 员工分析</a></li>
+                    <li><a href="#"><span class="fa fa-user-md"></span> 稼働率</a></li>
+                    <li><a href="#"><span class="fa fa-pencil"></span> 自定义</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-target=".property-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-building-o"></i> 资产管理<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="property-menu nav nav-list collapse">
+                    <li><a href="#"><span class="fa fa-windows"></span> 作业机器</a></li>
+                    <li><a href="#"><span class="fa fa-tv"></span> IP管理</a></li>
+                    <li><a href="#"><span class="fa fa-tags"></span> 虚拟机管理</a></li>
+                    <li><a href="#"><span class="fa fa-truck"></span> 上网流量管理</a></li>
+                </ul>
+            </li>
+            <li><a href="#" data-target=".system-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-cog"></i> 系统管理<i class="fa fa-collapse"></i></a></li>
+            <li>
+                <ul class="system-menu nav nav-list collapse">
+                    <li><a href="#"><span class="fa fa-flag"></span> 权限管理</a></li>
+                    <li><a href="#"><span class="fa fa-envelope"></span> 密码重置</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">Dashboard</h1>
+        </div>
+        <div class="main-content">
+            <div class="panel panel-default">
+                <a href="#page-stats" class="panel-heading" data-toggle="collapse">状态</a>
+                <div id="page-stats" class="panel-collapse panel-body collapse in">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="knob-container">
+                                <input class="knob" data-width="200" data-min="0" data-max="50" data-displayPrevious="true" value="8" data-fgColor="#92A3C2" data-readOnly=true;>
+                                <h3 class="text-muted text-center">非稼働人数</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="knob-container">
+                                <input class="knob" data-width="200" data-min="0" data-max="50" data-displayPrevious="true" value="2" data-fgColor="#92A3C2" data-readOnly=true;>
+                                <h3 class="text-muted text-center">本月度离职人数</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="knob-container">
+                                <input class="knob" data-width="200" data-min="0" data-max="50" data-displayPrevious="true" value="4" data-fgColor="#92A3C2" data-readOnly=true;>
+                                <h3 class="text-muted text-center">本年度离职人数</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="knob-container">
+                                <input class="knob" data-width="200" data-min="0" data-max="500" data-displayPrevious="true" value="200" data-fgColor="#92A3C2" data-readOnly=true;>
+                                <h3 class="text-muted text-center">未完成产值计划</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-collapse">人员统计</div>
+                        <div id="userStatistics" class="panel-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-collapse">稼働率</div>
+                        <div id="occupy" class="panel-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="panel panel-default"> 
+                        <div class="panel-heading no-collapse">
+                            <span class="panel-icon pull-right">
+                                <a href="#" class="demo-cancel-click" rel="tooltip" title="Click to refresh"><i class="fa fa-refresh"></i></a>
+                            </span>
+
+                            Needed to Close
+                        </div>
+                        <table class="table list">
+                          <tbody>
+                              <tr>
+                                  <td>
+                                      <a href="#"><p class="title">Care Hospital</p></a>
+                                      <p class="info">Sales Rating: 86%</p>
+                                  </td>
+                                  <td>
+                                      <p>Date: 7/19/2012</p>
+                                      <a href="#">View Transaction</a>
+                                  </td>
+                                  <td>
+                                      <p class="text-danger h3 pull-right" style="margin-top: 12px;">$20,500</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <a href="#"><p class="title">Custom Eyesight</p></a>
+                                      <p class="info">Sales Rating: 58%</p>
+                                  </td>
+                                  <td>
+                                      <p>Date: 7/19/2012</p>
+                                      <a href="#">View Transaction</a>
+                                  </td>
+                                  <td>
+                                      <p class="text-danger h3 pull-right" style="margin-top: 12px;">$12,600</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <a href="#"><p class="title">Clear Dental</p></a>
+                                      <p class="info">Sales Rating: 76%</p>
+                                  </td>
+                                  <td>
+                                      <p>Date: 7/19/2012</p>
+                                      <a href="#">View Transaction</a>
+                                  </td>
+                                  <td>
+                                      <p class="text-danger h3 pull-right" style="margin-top: 12px;">$2,500</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <a href="#"><p class="title">Safe Insurance</p></a>
+                                      <p class="info">Sales Rating: 82%</p>
+                                  </td>
+                                  <td>
+                                      <p>Date: 7/19/2012</p>
+                                      <a href="#">View Transaction</a>
+                                  </td>
+                                  <td>
+                                      <p class="text-danger h3 pull-right" style="margin-top: 12px;">$22,400</p>
+                                  </td>
+                              </tr>
+                                
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="panel panel-default">
+                        <a href="#widget2container" class="panel-heading" data-toggle="collapse">Collapsible </a>
+                        <div id="widget2container" class="panel-body collapse in">
+                            <h2>Built with Less</h2>
+                            <p>The CSS is built with Less. There is a compiled version included if you prefer plain CSS.</p>
+                            <p>Fava bean jícama seakale beetroot courgette shallot amaranth pea garbanzo carrot radicchio peanut leek pea sprouts arugula brussels sprout green bean. Spring onion broccoli chicory shallot winter purslane pumpkin gumbo cabbage squash beet greens lettuce celery. Gram zucchini swiss chard mustard burdock radish brussels sprout groundnut. Asparagus horseradish beet greens broccoli brussels.</p>
+                            <p><a class="btn btn-primary">Learn more »</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</body>
+</html>

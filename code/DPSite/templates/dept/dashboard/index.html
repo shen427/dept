@@ -1,0 +1,108 @@
+        {% load static %}
+        <link class="include" rel="stylesheet" type="text/css" href="{% static 'lib/jqplot/jquery.jqplot.css' %}" />
+        <script class="include" type="text/javascript" src="{% static 'lib/jquery-knob/js/jquery.knob.js' %}"></script>
+        <script class="include" type="text/javascript" src="{% static 'lib/jqplot/jquery.jqplot.js' %}"></script>
+        <script class="include" type="text/javascript" src="{% static 'lib/jqplot/plugins/jqplot.pieRenderer.js' %}"></script>
+        <script class="include" type="text/javascript" src="{% static 'lib/jqplot/plugins/jqplot.donutRenderer.js' %}"></script>
+        <script class="include" type="text/javascript" src="{% static 'lib/jqplot/plugins/jqplot.barRenderer.js' %}"></script>
+        <script class="include" type="text/javascript" src="{% static 'lib/jqplot/plugins/jqplot.categoryAxisRenderer.js' %}"></script>
+        <script class="include" type="text/javascript" src="{% static 'lib/jqplot/plugins/jqplot.pointLabels.js' %}"></script>
+        <script type="text/javascript">
+        $(function() {
+            $(".knob").knob();
+            $.jqplot.config.enablePlugins = true;
+            var dataPie = [[
+                    '新员工', 25
+                ], [
+                    '三年以下经验', 15
+                ], [
+                    '五年以下经验', 4
+                ], [
+                    '五年以上经验', 8
+                ]];
+            var plotPie = $.jqplot('userStatistics', [dataPie], {
+                seriesDefaults: {
+                    renderer:$.jqplot.DonutRenderer,
+                    rendererOptions:{
+                        sliceMargin: 3,
+                        startAngle: -90,
+                        showDataLabels: true,
+                        dataLabels: 'value',
+                        totalLabel: true
+                    }
+                },
+                legend: {
+                    show:true,
+                    location: 'nw'
+                }
+        });
+        var dataBar = [87, 92, 90, 89, 70, 80, 89, 95, 99, 100, 87, 76, 50];
+        var ticks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+        var plotBar = $.jqplot('occupy', [dataBar], {
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer: $.jqplot.BarRenderer,
+                pointLabels: { show: true }
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                }
+            },
+            highlighter: { show: false }
+        });
+        });
+        </script>
+        <div class="header">
+            <h1 class="page-title">Dashboard</h1>
+        </div>
+        <div class="main-content">
+            <div class="panel panel-default">
+                <a href="#page-stats" class="panel-heading" data-toggle="collapse">状态</a>
+                <div id="page-stats" class="panel-collapse panel-body collapse in">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="knob-container">
+                                <input class="knob" data-width="200" data-min="0" data-max="50" data-displayPrevious="true" value="8" data-fgColor="#92A3C2" data-readOnly=true;>
+                                <h3 class="text-muted text-center">非稼働人数</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="knob-container">
+                                <input class="knob" data-width="200" data-min="0" data-max="50" data-displayPrevious="true" value="2" data-fgColor="#92A3C2" data-readOnly=true;>
+                                <h3 class="text-muted text-center">本月度离职人数</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="knob-container">
+                                <input class="knob" data-width="200" data-min="0" data-max="50" data-displayPrevious="true" value="4" data-fgColor="#92A3C2" data-readOnly=true;>
+                                <h3 class="text-muted text-center">本年度离职人数</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="knob-container">
+                                <input class="knob" data-width="200" data-min="0" data-max="500" data-displayPrevious="true" value="200" data-fgColor="#92A3C2" data-readOnly=true;>
+                                <h3 class="text-muted text-center">未完成产值计划</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-collapse">人员统计</div>
+                        <div id="userStatistics" class="panel-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-collapse">稼働率</div>
+                        <div id="occupy" class="panel-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

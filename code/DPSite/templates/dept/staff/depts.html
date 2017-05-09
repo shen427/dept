@@ -1,0 +1,67 @@
+        <div class="header">
+            <h1 class="page-title">人员管理 - 部门</h1>
+        </div>
+        <div class="main-content">
+            <div class="panel panel-default">
+                <a href="#page-stats" class="panel-heading" data-toggle="collapse">部门</a>
+                <div id="page-stats" class="panel-collapse panel-body collapse in">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="btn-toolbar list-toolbar">
+                                <button class="btn btn-primary"><i class="fa fa-plus"></i>创建</button>
+                                <button class="btn btn-default">导入</button>
+                                <button class="btn btn-default">导出</button>
+                            </div>
+                            {% if items %}
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>部门编号</th>
+                                            <th>部门</th>
+                                            <th>上级部门</th>
+                                            <th>人员数</th>
+                                            <th style="width: 3.5em;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in items %}
+                                        <tr>
+                                            <td>{{ item.index }}</td>
+                                            <td>{{ item.dept.code }}</td>
+                                            <td>{{ item.dept.name }}</td>
+                                            <td>{{ item.dept.parent.name }}</td>
+                                            <td>{{ item.count }}</td>
+                                            <td>
+                                                <a href="dept.html"><i class="fa fa-pencil"></i></a>
+                                                <a href="#createModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <p>系统中没有部门</p>
+                            {% endif %}
+                            <div class="modal small fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h3 id="createModalLabel">删除确认</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>是否确认删除该部门<br>删除后无法恢复.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+                                            <button class="btn btn-danger" data-dismiss="modal">删除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

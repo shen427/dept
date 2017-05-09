@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap Admin</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
+    <link class="include" rel="stylesheet" type="text/css" href="lib/jqplot/jquery.jqplot.css" />
+
+    <script src="lib/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var uls = $('.sidebar-nav > ul > *').clone();
+        uls.addClass('visible-xs');
+        $('#main-menu').append(uls.clone());
+    });
+    </script>
+    <style type="text/css">
+        .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover { 
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="theme-blue">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="" href="index.html"><span class="navbar-brand"><span class="fa fa-paper-plane"></span> 国际事业-第二事业部</span></a>
+        </div>
+
+        <div class="navbar-collapse collapse" style="height: 1px;">
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+                <li class="dropdown hidden-xs">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user padding-right-small" style="position:relative;top: 3px;"></span> 张三
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">我的账号</a></li>
+                        <li><a href="#">密码修改</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="#">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar-nav">
+        <ul>
+            <li><a href="index.html" class="nav-header"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+            <li>
+                <a href="#" data-target=".user-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-user"></i> 人员管理<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="user-menu nav nav-list collapse">
+                    <li><a href="users.html"><span class="fa fa-child"></span> 人员</a></li>
+                    <li class="active"><a href="#"><span class="fa fa-users"></span> 部门</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-target=".prj-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-code-fork"></i> 项目管理<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="prj-menu nav nav-list collapse">
+                    <li><a href="projects.html"><span class="fa fa-code"></span> 项目</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-target=".score-menu" class="nav-header" data-toggle="collapse">
+                    <i class="fa fa-fw fa-file-powerpoint-o"></i> 实绩管理<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="score-menu nav nav-list collapse in">
+                    <li><a href="plan.html"><span class="fa fa-file-excel-o"></span> 产值计划</a></li>
+                    <li class="active"><a href="planHistory.html"><span class="fa fa-history"></span> 计划历史</a></li>
+                    <li><a href="score.html"><span class="fa fa-file-image-o"></span> 实绩统计</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-target=".chart-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-bar-chart-o"></i> 统计分析<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="chart-menu nav nav-list collapse">
+                    <li><a href="#"><span class="fa fa-male"></span> 员工分析</a></li>
+                    <li><a href="#"><span class="fa fa-user-md"></span> 稼働率</a></li>
+                    <li><a href="#"><span class="fa fa-pencil"></span> 自定义</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-target=".property-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="fa fa-fw fa-building-o"></i> 资产管理<i class="fa fa-collapse"></i>
+                </a>
+            </li>
+            <li>
+                <ul class="property-menu nav nav-list collapse">
+                    <li><a href="#"><span class="fa fa-windows"></span> 作业机器</a></li>
+                    <li><a href="#"><span class="fa fa-tv"></span> IP管理</a></li>
+                    <li><a href="#"><span class="fa fa-tags"></span> 虚拟机管理</a></li>
+                    <li><a href="#"><span class="fa fa-truck"></span> 上网流量管理</a></li>
+                </ul>
+            </li>
+            <li><a href="#" data-target=".system-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-cog"></i> 系统管理<i class="fa fa-collapse"></i></a></li>
+            <li>
+                <ul class="system-menu nav nav-list collapse">
+                    <li><a href="#"><span class="fa fa-flag"></span> 权限管理</a></li>
+                    <li><a href="#"><span class="fa fa-envelope"></span> 密码重置</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">实绩管理 - 计划比较</h1>
+        </div>
+        <div class="main-content">
+            <div class="panel panel-default">
+                <a href="#planCurrent" class="panel-heading" data-toggle="collapse">当前计划</a>
+                <div id="planCurrent" class="panel-collapse panel-body collapse in">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <button class="btn btn-primary">保存</button>
+                                <button class="btn btn-default">回滚</button>
+                            </div>
+                            <table class="table table-bordered table-striped table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>项目名</th>
+                                        <th>17/01</th>
+                                        <th>17/02</th>
+                                        <th>17/03</th>
+                                        <th>17/04</th>
+                                        <th>17/05</th>
+                                        <th>17/06</th>
+                                        <th>17/07</th>
+                                        <th>17/08</th>
+                                        <th>17/09</th>
+                                        <th>17/10</th>
+                                        <th>17/11</th>
+                                        <th>17/12</th>
+                                        <th>合计</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SDCC</td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASE</td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IM系</td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>国内</td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>视频</td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>其他</td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td><input type="text" class="form-control input-sm" style="width:50px;height:22px;" value="50"/></td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>合计</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>3600</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <a href="#plan001" class="panel-heading" data-toggle="collapse">计划-001(2017-03-03 14:22:23)</a>
+                <div id="plan001" class="panel-collapse panel-body collapse in">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered table-striped table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>项目名</th>
+                                        <th>17/01</th>
+                                        <th>17/02</th>
+                                        <th>17/03</th>
+                                        <th>17/04</th>
+                                        <th>17/05</th>
+                                        <th>17/06</th>
+                                        <th>17/07</th>
+                                        <th>17/08</th>
+                                        <th>17/09</th>
+                                        <th>17/10</th>
+                                        <th>17/11</th>
+                                        <th>17/12</th>
+                                        <th>合计</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SDCC</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASE</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IM系</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>国内</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>视频</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>其他</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>合计</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>3600</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <a href="#plan002" class="panel-heading" data-toggle="collapse">计划-002(2017-03-04 14:22:23)</a>
+                <div id="plan002" class="panel-collapse panel-body collapse in">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered table-striped table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>项目名</th>
+                                        <th>17/01</th>
+                                        <th>17/02</th>
+                                        <th>17/03</th>
+                                        <th>17/04</th>
+                                        <th>17/05</th>
+                                        <th>17/06</th>
+                                        <th>17/07</th>
+                                        <th>17/08</th>
+                                        <th>17/09</th>
+                                        <th>17/10</th>
+                                        <th>17/11</th>
+                                        <th>17/12</th>
+                                        <th>合计</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SDCC</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASE</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IM系</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>国内</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>视频</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>其他</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>合计</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>3600</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <a href="#plan003" class="panel-heading" data-toggle="collapse">计划-003(2017-03-05 14:22:23)</a>
+                <div id="plan003" class="panel-collapse panel-body collapse in">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered table-striped table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>项目名</th>
+                                        <th>17/01</th>
+                                        <th>17/02</th>
+                                        <th>17/03</th>
+                                        <th>17/04</th>
+                                        <th>17/05</th>
+                                        <th>17/06</th>
+                                        <th>17/07</th>
+                                        <th>17/08</th>
+                                        <th>17/09</th>
+                                        <th>17/10</th>
+                                        <th>17/11</th>
+                                        <th>17/12</th>
+                                        <th>合计</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SDCC</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASE</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IM系</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>国内</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>视频</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>其他</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>合计</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>300</td>
+                                        <td>3600</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
