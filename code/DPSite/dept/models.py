@@ -22,6 +22,10 @@ class Dept(models.Model):
     parent = models.ForeignKey('self', null=True, db_index=True, blank=True, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+    @classmethod
+    def create(cls):
+        u = cls()
+        return u
 
 
 class Staff(models.Model):

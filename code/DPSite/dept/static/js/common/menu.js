@@ -25,13 +25,13 @@ $(function() {
             } else if ($(this).is("#dept")) {
                 $.dept.menu.staff.depts();
             } else if ($(this).is("#project")) {
-                $.dept.menu.staff.projects();
+                $.dept.menu.project.projects();
             } else if ($(this).is("#salesPlan")) {
-                $.dept.menu.staff.salesPlan();
+                $.dept.menu.score.salesPlan();
             } else if ($(this).is("#planHistory")) {
-                $.dept.menu.staff.planHistory();
+                $.dept.menu.score.planHistory();
             } else if ($(this).is("#actualScore")) {
-                $.dept.menu.staff.actualScore();
+                $.dept.menu.score.actualScore();
             }
         },
         staff: {

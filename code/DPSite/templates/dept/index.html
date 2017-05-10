@@ -21,15 +21,16 @@
     <script type="text/javascript" src="{% static 'js/common/menu.js' %}"></script>
 </head>
 <body class="theme-blue">
-    {% include './menu.html' %}
+    {% include './common/menu.html' %}
     <script>
     $(function() {
-        ajaxPost(
-            $.dept.BASE + "/dashboard/index",
-            function(data) {
+        $.dept.ajax({
+            url: $.dept.BASE + "/dashboard/index",
+            type: "post",
+            success: function(data) {
                 $("#main").html(data);
             }
-        );
+        });
         $.dept.menu.init();
         $("#dept").click(function(e) {
             alert('test');
