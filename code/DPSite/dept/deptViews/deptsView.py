@@ -3,8 +3,12 @@ from django_ajax.decorators import ajax
 from ..models import Dept, Staff
 
 
-def getIndexData():
-    depts = Dept.objects.all()
+def getIndexData(request):
+    parentId = request.POST['parentId']
+    if parentId:
+        depts = Dept.objects.filter(parent_id=parentId)
+    else:
+        depts = Dept.objects.all()
     items = []
     for indx, dept in enumerate(depts):
         staffCount = Staff.objects.filter(dept_id=dept.id).count()
@@ -19,16 +23,28 @@ def getIndexData():
 
 @ajax
 def index(request):
-    items = getIndexData()
-    context = {
-        'items': items
-    }
+    return render(request, 'dept/staff/depts.html')
 
-    return render(request, 'dept/staff/depts.html', context)
+
+@ajax
+def deptsTree(request):
+    allDepts = Dept.objects.all()
+    items = []
+    for dept in allDepts:
+        item = {
+            'id': dept.id,
+            'pid': dept.parent.id if dept.parent else '',
+            'text': dept.name
+        }
+        items.append(item)
+
+    return {'contents': items}
+
 
 @ajax
 def deptsData(request):
-    items = getIndexData()
+    parentId = request.POST['parentId']
+    items = getIndexData(request)
     depts = []
     for item in items:
         dept = {

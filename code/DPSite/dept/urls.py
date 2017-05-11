@@ -13,6 +13,7 @@ urlpatterns = [
     # depts
     url(r'^depts/index$', deptsView.index, name='deptsIndex'),
     url(r'^depts/deptsData$', deptsView.deptsData, name='deptsData'),
+    url(r'^depts/deptsTree', deptsView.deptsTree, name='deptsTree'),
     url(r'^depts/deptInit', deptsView.deptInit, name='deptInit'),
     url(r'^depts/deptSave', deptsView.deptSave, name='deptSave'),
     url(r'^depts/deptDelete', deptsView.deptDelete, name='deptDelete'),

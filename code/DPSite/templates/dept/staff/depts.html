@@ -1,12 +1,21 @@
+
 <div class="header">
     <h1 class="page-title">人员管理 - 部门</h1>
 </div>
 <div class="main-content">
-    <div class="panel panel-default">
-        <a href="#page-stats" class="panel-heading" data-toggle="collapse">部门</a>
-        <div id="page-stats" class="panel-collapse panel-body collapse in">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
+    <div class="row">
+        <div class="col-md-3 col-sm-3">
+            <div class="panel panel-default">
+                <a href="#deptTree" class="panel-heading" data-toggle="collapse">部门结构</a>
+                <div id="deptTree" class="panel-collapse panel-body collapse in">
+                    <div id="tree"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-9">
+            <div class="panel panel-default">
+                <a href="#deptTable" class="panel-heading" data-toggle="collapse">部门</a>
+                <div id="deptTable" class="panel-collapse panel-body collapse in">
                     <div class="btn-toolbar list-toolbar">
                         <button id="createDept" class="btn btn-primary"><i class="fa fa-plus"></i>创建</button>
                         <button id="importDept" class="btn btn-default">导入</button>
@@ -18,40 +27,24 @@
                                 <th style="width: 4em;">No.</th>
                                 <th style="width: 8em;">部门编号</th>
                                 <th>部门名</th>
-                                <th>上位部门</th>
                                 <th>人员数</th>
                                 <th style="width: 3.5em;"></th>
                             </tr>
                         </thead>
                         <tbody>
-
-                        {% if items %}
-                            {% for item in items %}
-                                <tr>
-                                    <td>{{ item.indx }}</td>
-                                    <td>{{ item.dept.code }}</td>
-                                    <td>{{ item.dept.name }}</td>
-                                    <td>{{ item.dept.parent.name }}</td>
-                                    <td>{{ item.cont }}</td>
-                                    <td>
-                                        <a href="#" deptId="{{ item.dept.id }}" class="editDept"><i class="fa fa-pencil"></i></a>&nbsp;
-                                        <a href="#" deptId="{{ item.dept.id }}" class="deleteDept"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        {% else %}
-                            <tr>
-                                <td colspan="6">系统中没有部门。请点击<b>创建</b>按钮添加部门。</td>
-                            </tr>
-                        {% endif %}
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<input type="hidden" id="_currentParentId" />
+
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'lib/bootstrap-treeview/bootstrap-treeview.min.css' %}">
+<script type="text/javascript" src="{% static 'lib/bootstrap-treeview/bootstrap-treeview.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/staff/depts.js' %}"></script>
 <script>
 $(function() {

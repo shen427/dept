@@ -4,16 +4,80 @@ $(function() {
             $("#createDept").click($.dept.depts._createEditInit);
             $(".editDept").click($.dept.depts._createEditInit);
             $(".deleteDept").click($.dept.depts._deleteInit);
+            debugger;
+            $.dept.depts._initDeptTree();
+        },
+        _initDeptTree: function() {
+            $.dept.ajax({
+                url: $.dept.BASE + "/depts/deptsTree",
+                success: function(data) {
+                    $("#tree").treeview({
+                        data: $.dept.depts._toTreeData(data.contents),
+                        onNodeSelected: function(e, d) {
+                            $("#_currentParentId").val(d.id);
+                            $.dept.depts._refreshDeptsTable();
+                        }
+                    });
+                    $.dept.depts._refreshDeptsTable();
+                }
+            });
+        },
+        _toTreeData: function(data) {
+            var pos = {};
+            var tree = [];
+            var i = 0;
+            while(data.length != 0){
+                if (!data[i].pid) {
+                    tree.push({
+                        id: data[i].id,
+                        text: data[i].text,
+                        nodes: []
+                    });
+                    pos[data[i].id] = [tree.length-1];
+                    data.splice(i,1);
+                    i--;
+                } else {
+                    var posArr = pos[data[i].pid];
+                    if(posArr != undefined){
+                        var obj = tree[posArr[0]];
+                        for(var j = 1; j < posArr.length; j++){
+                            obj = obj.nodes[posArr[j]];
+                        }
+
+                        obj.nodes.push({
+                            id: data[i].id,
+                            text: data[i].text,
+                            nodes: []
+                        });
+                        pos[data[i].id] = posArr.concat([obj.nodes.length-1]);
+                        data.splice(i,1);
+                        i--;
+                    }
+                }
+                i++;
+                if(i > data.length - 1){
+                    i = 0;
+                }
+            }
+            return tree;
         },
         _refreshDeptsTable: function() {
+            var parentId = $("#_currentParentId").val(),
+                table = $("#depts > tbody");
+            table.empty();
+            if (!parentId) {
+                return;
+            }
+            var data = {
+                parentId: parentId
+            };
             $.dept.ajax({
                 url: $.dept.BASE + "/depts/deptsData",
                 type: "post",
+                data : data,
                 success: function(data) {
-                    var depts = data.depts;
-                    var table = $("#depts > tbody"),
+                    var depts = data.depts,
                         html;
-                    table.empty();
                     if (depts && depts.length > 0) {
                         $.each(depts, function (index, dept) {
                             html = "<tr>"
@@ -23,8 +87,6 @@ $(function() {
                             html = html + "<td>" + dept.code + "</td>";
                             // name
                             html = html + "<td>" + dept.name + "</td>";
-                            // parentName
-                            html = html + "<td>" + dept.parent.name + "</td>";
                             // count
                             html = html + "<td>" + dept.cont + "</td>";
                             // op
@@ -78,7 +140,7 @@ $(function() {
                 type: "post",
                 data: data,
                 success: function() {
-                    $.dept.depts._refreshDeptsTable();
+                    $.dept.depts._initDeptTree();
                 }
             });
         },
@@ -122,7 +184,7 @@ $(function() {
                         'parentId': $("#parentId").val()
                     },
                     success: function() {
-                        $.dept.depts._refreshDeptsTable();
+                        $.dept.depts._initDeptTree();
                     }
                 });
             });
