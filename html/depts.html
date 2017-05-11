@@ -129,15 +129,70 @@
         </ul>
     </div>
     <div class="content">
+        <!--<link rel="stylesheet" type="text/css" href="lib/bootstrap-treeview/bootstrap-treeview.min.css">-->
+        <script src="lib/bootstrap-treeview/bootstrap-treeview.min.js" type="text/javascript"></script>
+        <script>
+        $(function() {
+            var treeData = [{
+                text: '软件研发中心',
+                nodes: [{
+                    text: '第一事业部',
+                    nodes: [{
+                        text: '第一开发部'
+                    }, {
+                        text: '第二开发部'
+                    }, {
+                        text: '第三开发部'
+                    }]
+                }, {
+                    text: '第二事业部',
+                    nodes: [{
+                        text: '第一开发部'
+                    }, {
+                        text: '第二开发部'
+                    }, {
+                        text: '第三开发部'
+                    }]
+                }, {
+                    text: '第三事业部',
+                    nodes: [{
+                        text: '第一开发部'
+                    }, {
+                        text: '第二开发部'
+                    }, {
+                        text: '第三开发部'
+                    }]
+                }, {
+                    text: '第四事业部',
+                    nodes: [{
+                        text: '第一开发部'
+                    }, {
+                        text: '第二开发部'
+                    }, {
+                        text: '第三开发部'
+                    }]
+                }]
+            }];
+            $("#tree").treeview({data: treeData});
+        });
+        </script>
         <div class="header">
             <h1 class="page-title">人员管理 - 部门</h1>
         </div>
         <div class="main-content">
-            <div class="panel panel-default">
-                <a href="#page-stats" class="panel-heading" data-toggle="collapse">部门</a>
-                <div id="page-stats" class="panel-collapse panel-body collapse in">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-sm-3 col-md-3">
+                    <div class="panel panel-default">
+                        <a href="#deptTree" class="panel-heading" data-toggle="collapse">部门结构</a>
+                        <div id="deptTree" class="panel-collapse panel-body collapse in">
+                            <div id="tree"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-9">
+                    <div class="panel panel-default">
+                        <a href="#deptTable" class="panel-heading" data-toggle="collapse">第二事业部</a>
+                        <div id="deptTable" class="panel-collapse panel-body collapse in">
                             <div class="btn-toolbar list-toolbar">
                                 <button class="btn btn-primary"><i class="fa fa-plus"></i>创建</button>
                                 <button class="btn btn-default">导入</button>
@@ -146,10 +201,10 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
-                                        <th>部门编号</th>
+                                        <th style="width: 5em;">No.</th>
+                                        <th style="width: 8em;">部门编号</th>
                                         <th>部门</th>
-                                        <th>上级部门</th>
+                                        <th>负责人</th>
                                         <th>人员数</th>
                                         <th style="width: 3.5em;"></th>
                                     </tr>
@@ -159,7 +214,7 @@
                                         <td>1</td>
                                         <td>20</td>
                                         <td>第二事业部</td>
-                                        <td>&nbsp;</td>
+                                        <td>朱张良</td>
                                         <td>6</td>
                                         <td>
                                             <a href="dept.html"><i class="fa fa-pencil"></i></a>
@@ -170,7 +225,7 @@
                                         <td>2</td>
                                         <td>21</td>
                                         <td>第一开发部</td>
-                                        <td>第二事业部</td>
+                                        <td>黄根荣</td>
                                         <td>48</td>
                                         <td>
                                             <a href="dept.html"><i class="fa fa-pencil"></i></a>
@@ -181,7 +236,7 @@
                                         <td>3</td>
                                         <td>22</td>
                                         <td>第二开发部</td>
-                                        <td>第二事业部</td>
+                                        <td>黄定海</td>
                                         <td>51</td>
                                         <td>
                                             <a href="dept.html"><i class="fa fa-pencil"></i></a>
@@ -192,7 +247,7 @@
                                         <td>4</td>
                                         <td>23</td>
                                         <td>第三开发部</td>
-                                        <td>第二事业部</td>
+                                        <td>汪军</td>
                                         <td>53</td>
                                         <td>
                                             <a href="dept.html"><i class="fa fa-pencil"></i></a>
@@ -221,7 +276,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>      
         </div>
     </div>
 </body>
