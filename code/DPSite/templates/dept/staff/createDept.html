@@ -20,16 +20,6 @@
                         <label for="deptName">部门名</label>
                         <input type="text" class="form-control" id="deptName" placeholder="部门名" max-length="20" value="{{ dept.name }}">
                     </div>
-                    <div class="form-group">
-                        <label for="parentId">上位部门</label>
-                        <select id="parentId" class="form-control">
-                        </select>
-                    </div>
-                    {% if dept.parent %}
-                    <input type="hidden" id="_parentId" value="{{ dept.parent.id }}" />
-                    {% else %}
-                    <input type="hidden" id="_parentId" value="" />
-                    {% endif %}
                 </form>
             </div>
             <div class="modal-footer">

@@ -4,18 +4,28 @@ $(function() {
             $("#createDept").click($.dept.depts._createEditInit);
             $(".editDept").click($.dept.depts._createEditInit);
             $(".deleteDept").click($.dept.depts._deleteInit);
+            $.dept.initHeight();
             debugger;
             $.dept.depts._initDeptTree();
         },
         _initDeptTree: function() {
+            var tableDiv = $("#deptContainer");
+            var table = $("#depts > tbody");
+            tableDiv.hide();
             $.dept.ajax({
                 url: $.dept.BASE + "/depts/deptsTree",
                 success: function(data) {
                     $("#tree").treeview({
                         data: $.dept.depts._toTreeData(data.contents),
                         onNodeSelected: function(e, d) {
+                            tableDiv.show();
                             $("#_currentParentId").val(d.id);
                             $.dept.depts._refreshDeptsTable();
+                        },
+                        onNodeUnselected : function(e, d) {
+                            table.empty();
+                            tableDiv.hide();
+                            $("#_currentParentId").val('');
                         }
                     });
                     $.dept.depts._refreshDeptsTable();
@@ -26,7 +36,7 @@ $(function() {
             var pos = {};
             var tree = [];
             var i = 0;
-            while(data.length != 0){
+            while(data.length != 0) {
                 if (!data[i].pid) {
                     tree.push({
                         id: data[i].id,
@@ -38,9 +48,9 @@ $(function() {
                     i--;
                 } else {
                     var posArr = pos[data[i].pid];
-                    if(posArr != undefined){
+                    if(posArr != undefined) {
                         var obj = tree[posArr[0]];
-                        for(var j = 1; j < posArr.length; j++){
+                        for(var j = 1; j < posArr.length; j++) {
                             obj = obj.nodes[posArr[j]];
                         }
 
@@ -55,11 +65,23 @@ $(function() {
                     }
                 }
                 i++;
-                if(i > data.length - 1){
+                if(i > data.length - 1) {
                     i = 0;
                 }
             }
+            $.dept.depts._removeEmptySubNodes(tree);
             return tree;
+        },
+        _removeEmptySubNodes : function(treeNodes){
+            $.each(treeNodes, function() {
+                if (this.nodes) {
+                    if (this.nodes.length > 0) {
+                        $.dept.depts._removeEmptySubNodes(this.nodes);
+                    } else {
+                        delete this["nodes"];
+                    }
+                }
+            });
         },
         _refreshDeptsTable: function() {
             var parentId = $("#_currentParentId").val(),
@@ -157,12 +179,12 @@ $(function() {
                     deptSelect.empty();
 
                     // add a empty option.
-                    $("<option></option>").val("").text("").appendTo(deptSelect);
                     if (depts && depts.length > 0) {
                         $.each(depts, function (index, dept) {
-                            var code = dept.id,
+                            var id = dept.id,
+                                code = dept.code,
                                 name = dept.name;
-                            $("<option></option>").val(code).text(name).appendTo(deptSelect);
+                            $("<option></option>").val(id).text(code + ":" + name).appendTo(deptSelect);
                         });
                         if (parentId) {
                             deptSelect.val(parentId);
@@ -181,7 +203,7 @@ $(function() {
                         'id': $("#_deptId").val(),
                         'code': $("#deptId").val(),
                         'name': $("#deptName").val(),
-                        'parentId': $("#parentId").val()
+                        'parentId': $("#_currentParentId").val()
                     },
                     success: function() {
                         $.dept.depts._initDeptTree();

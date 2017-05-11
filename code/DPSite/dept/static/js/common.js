@@ -22,6 +22,15 @@ $(function() {
             '</div>'
     };
 
+    $.dept.initHeight = function() {
+        var wHeight = document.documentElement.clientHeight;
+        $(".main-content").height(wHeight - 100);
+        $(window).resize(function() {
+            var wHeight = document.documentElement.clientHeight;
+            $(".main-content").height(wHeight - 100);
+        });
+    };
+
     $.dept.message = {
         _message: function(type, title, messages, callbacks) {
             // icon
